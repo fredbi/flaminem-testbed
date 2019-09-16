@@ -19,7 +19,7 @@ that "federated roles" are natively parsed from the token using the structure of
 
 ### Fix
 
-Our fix is very lightweight but touches core classes for OIDC identity broker (in `services/src/main/java/org/keycloak/broker/oidc`).
+The fix is very lightweight but touches core classes for OIDC identity broker (in `services/src/main/java/org/keycloak/broker/oidc`).
 
 It is based on `https://github.com/keycloak/keycloak@7.0.0` (latest buildable release).
 
@@ -89,9 +89,9 @@ We tried to keep the configuration of these 3 instances minimal: realm is only m
 
 ### Play book
 
-You can take a quick tour of the testbed configuration (7 min): [here](docs.config.mp4).
+You can take a quick tour of the testbed configuration (7 min): [here](https://raw.githubusercontent.com/fredbi/flaminem-testbed/master/docs/config.mp4).
 
-You may follow our testcase (5 min) [here](docs/demo.mp4) to verify that roles are correctly updated, or play by yourself with this docker-compose testbed.
+You may follow a full testcase (5 min) [here](https://raw.githubusercontent.com/fredbi/flaminem-testbed/master/docs/demo.mp4) to verify that roles are correctly updated, or play by yourself with this docker-compose testbed.
 
 URLs and credentials:
 
