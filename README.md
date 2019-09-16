@@ -37,7 +37,7 @@ There is no actual code change but line feeds. I just found this omission much o
 Build docker images: there is a builder to save a litle time next time you build, then the main image.
 
 > Disclaimer: for the sake of this demonstration I've kept the Dockerfile simple and compatible with most docker versions running around.
-> It is almost directly copied from the official keycloak repo to build docker images: `https://github.com/keycloak/docker-keycloak`.
+> It is almost directly copied from the official keycloak repo to build docker images: `https://github.com/keycloak/keycloak-containers`.
 > As a consequence the build is pretty crude, in particular when it comes to download maven dependencies (on my dev env, it takes more than 1h...).
 >
 > The keycloak image built from source for this demonstration is also much larger than a production one (~ 2 GB instead of ~ 850 MB):
