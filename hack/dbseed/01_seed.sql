@@ -1,0 +1,3 @@
+CREATE DATABASE flaminem WITH OWNER = dbuser;
+CREATE DATABASE customer WITH OWNER = dbuser;
+CREATE DATABASE oidc WITH OWNER = dbuser;

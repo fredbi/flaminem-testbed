@@ -1,0 +1,102 @@
+version: '3.5'
+
+networks:
+  admin:
+    driver: bridge
+
+volumes:
+  postgresdata:
+  pgadmindata:
+
+services:
+  keycloak-flaminem.localtest.me:
+    container_name: keycloak-flaminem
+    image: keycloak-flaminem:latest
+    depends_on:
+    - postgres
+    environment:
+    - KEYCLOAK_USER=admin
+    - KEYCLOAK_PASSWORD=flaminem
+    - DB_DATABASE=flaminem
+    - DB_USER=dbuser
+    - DB_PASSWORD=secret
+    ports:
+    - 8080:8080
+    networks:
+    - admin
+    command:
+      - "-b 0.0.0.0"
+      - "-c standalone.xml"
+
+  keycloak-customer.localtest.me:
+    container_name: keycloak-customer
+    image: jboss/keycloak:6.0.1
+    depends_on:
+    - postgres
+    environment:
+    - KEYCLOAK_USER=admin
+    - KEYCLOAK_PASSWORD=customer
+    - KEYCLOAK_HOSTNAME=keycloak-customer.localtest.me
+    - KEYCLOAK_HTTP_PORT=8081
+    - DB_DATABASE=customer
+    - DB_USER=dbuser
+    - DB_PASSWORD=secret
+    ports:
+    - 8081:8081
+    networks:
+    - admin
+    command:
+      - "-b 0.0.0.0"
+      - "-c standalone.xml"
+      - "-Djboss.http.port=8081"
+
+  keycloak-oidc.localtest.me:
+    container_name: keycloak-oidc-customer
+    image: jboss/keycloak:6.0.1
+    depends_on:
+    - postgres
+    environment:
+    - KEYCLOAK_USER=admin
+    - KEYCLOAK_PASSWORD=oidc
+    - KEYCLOAK_HOSTNAME=keycloak-oidc.localtest.me
+    - KEYCLOAK_HTTP_PORT=8082
+    - DB_DATABASE=oidc
+    - DB_USER=dbuser
+    - DB_PASSWORD=secret
+    ports:
+    - 8082:8082
+    networks:
+    - admin
+    command:
+      - "-b 0.0.0.0"
+      - "-c standalone.xml"
+      - "-Djboss.http.port=8082"
+
+  postgres:
+    # TODO: take standard image
+    image: mdillon/postgis:10-alpine
+    volumes:
+    - type: bind 
+      source: ${PWD}/hack/dbseed 
+      target: /docker-entrypoint-initdb.d
+    - postgresdata:/var/lib/postgresql/data
+    networks:
+    - admin
+    environment:
+    - POSTGRES_USER=dbuser
+    - POSTGRES_PASSWORD=secret
+
+  pgadmin:
+    container_name: pgadmin
+    image: thajeztah/pgadmin4:latest
+    volumes:
+    - pgadmindata:/pgadmin
+    networks:
+    - admin
+    ports:
+    - 6050:5050
+    environment:
+    - PG_ADMIN_PORT=5050
+    - PG_ADMIN_DATA_DIR=/pgadmin/
+    depends_on:
+    - postgres

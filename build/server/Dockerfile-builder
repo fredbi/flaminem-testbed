@@ -1,0 +1,8 @@
+FROM jboss/base-jdk:8
+USER root
+ENV M2_HOME=/opt/jboss/maven
+RUN yum update -y && yum install -y epel-release git && yum install -y jq openssl which && yum clean all
+ADD tools /opt/jboss/tools
+RUN mkdir -p /opt/jboss 
+WORKDIR /opt/jboss
+RUN curl -s https://apache.uib.no/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz | tar xz && mv apache-maven-3.5.4 /opt/jboss/maven
