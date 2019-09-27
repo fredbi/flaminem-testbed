@@ -11,46 +11,46 @@ SET standard_conforming_strings = on;
 -- Drop databases
 --
 
-DROP DATABASE customer;
-DROP DATABASE dbuser;
-DROP DATABASE flaminem;
-DROP DATABASE oidc;
-
-
-
-
+--DROP DATABASE customer;
+--DROP DATABASE dbuser;
+--DROP DATABASE flaminem;
+--DROP DATABASE oidc;
 --
--- Drop roles
 --
-
-DROP ROLE dbuser;
-DROP ROLE postgres;
-
-
 --
--- Roles
 --
-
-CREATE ROLE dbuser;
-ALTER ROLE dbuser WITH SUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md528bd1c9260e10bf54ae1622797b07587';
-CREATE ROLE postgres;
-ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
-
-
-
-
-
-
+----
+---- Drop roles
+----
 --
--- Database creation
+--DROP ROLE dbuser;
+--DROP ROLE postgres;
 --
-
-CREATE DATABASE customer WITH TEMPLATE = template0 OWNER = dbuser;
-CREATE DATABASE dbuser WITH TEMPLATE = template0 OWNER = postgres;
-CREATE DATABASE flaminem WITH TEMPLATE = template0 OWNER = dbuser;
-CREATE DATABASE oidc WITH TEMPLATE = template0 OWNER = dbuser;
-REVOKE CONNECT,TEMPORARY ON DATABASE template1 FROM PUBLIC;
-GRANT CONNECT ON DATABASE template1 TO PUBLIC;
+--
+----
+---- Roles
+----
+--
+--CREATE ROLE dbuser;
+--ALTER ROLE dbuser WITH SUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md528bd1c9260e10bf54ae1622797b07587';
+--CREATE ROLE postgres;
+--ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
+--
+--
+--
+--
+--
+--
+----
+---- Database creation
+----
+--
+--CREATE DATABASE customer WITH TEMPLATE = template0 OWNER = dbuser;
+--CREATE DATABASE dbuser WITH TEMPLATE = template0 OWNER = postgres;
+--CREATE DATABASE flaminem WITH TEMPLATE = template0 OWNER = dbuser;
+--CREATE DATABASE oidc WITH TEMPLATE = template0 OWNER = dbuser;
+--REVOKE CONNECT,TEMPORARY ON DATABASE template1 FROM PUBLIC;
+--GRANT CONNECT ON DATABASE template1 TO PUBLIC;
 
 
 \connect customer

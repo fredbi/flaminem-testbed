@@ -86,17 +86,17 @@ services:
     - POSTGRES_USER=dbuser
     - POSTGRES_PASSWORD=secret
 
-  pgadmin:
-    container_name: pgadmin
-    image: thajeztah/pgadmin4:latest
-    volumes:
-    - pgadmindata:/pgadmin
-    networks:
-    - admin
-    ports:
-    - 6050:5050
-    environment:
-    - PG_ADMIN_PORT=5050
-    - PG_ADMIN_DATA_DIR=/pgadmin/
-    depends_on:
-    - postgres
+  #pgadmin:
+  #  container_name: pgadmin
+  #  image: thajeztah/pgadmin4:latest
+  #  volumes:
+  #  - pgadmindata:/pgadmin
+  #  networks:
+  #  - admin
+  #  ports:
+  #  - 6050:5050
+  #  environment:
+  #  - PG_ADMIN_PORT=5050
+  #  - PG_ADMIN_DATA_DIR=/pgadmin/
+  #  depends_on:
+  #  - postgres

@@ -30,6 +30,15 @@ The fix does not affect "social login" brokers, nor does it change the behavior 
 Disclaimer: depending on your dev env, you might want to omit the initial commit on the typescript source (i.e. admin console UI app).
 There is no actual code change but line feeds. I just found this omission much of an annoyance when developping on a unix system.
 
+### Extra
+
+* added unit test with new dependency on mockito mocking package
+* added logging all grant/revoke actions on brokered users, e.g.
+
+```
+07:22:16,565 INFO  [org.keycloak.broker.oidc.mappers.ClaimToRoleMapper] (default task-4) granting role can-do-that to brokered user: frederic-oidc
+```
+
 ### Demonstration
 
 ##### Build demo
@@ -39,9 +48,6 @@ Build docker images: there is a builder to save a litle time next time you build
 > Disclaimer: for the sake of this demonstration I've kept the Dockerfile simple and compatible with most docker versions running around.
 > It is almost directly copied from the official keycloak repo to build docker images: `https://github.com/keycloak/keycloak-containers`.
 > As a consequence the build is pretty crude, in particular when it comes to download maven dependencies (on my dev env, it takes more than 1h...).
->
-> The keycloak image built from source for this demonstration is also much larger than a production one (~ 2 GB instead of ~ 850 MB):
-> for debugging purpose, I've omitted the removal of the maven stuff.
 
 ```bash
 hack/build-all-images.sh
@@ -52,6 +58,7 @@ docker images|grep keycloak
 ...
 keycloak-flaminem                                               latest                            7f355a10e8dd        6 hours ago         2.13GB
 keycloak-builder                                                latest                            91e39cf04dd9        28 hours ago        910MB
+jboss/keycloak                                                  6.0.1                             3a6718ca4ee0        5 months ago        1.2GB
 ```
 
 ##### Run demo

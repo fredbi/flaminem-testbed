@@ -20,7 +20,10 @@ if [ "$GIT_REPO" != "" ]; then
     MASTER_HEAD=`git log -n1 --format="%H"`
     echo "Keycloak from [build]: $GIT_REPO/$GIT_BRANCH/commit/$MASTER_HEAD"
 
-    $M2_HOME/bin/mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
+    # This disables test
+    #$M2_HOME/bin/mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
+    # This runs the full maven targets, including unit tests
+    $M2_HOME/bin/mvn -Pdistribution -pl distribution/server-dist -am clean test install
     
     cd /opt/jboss
 
@@ -29,9 +32,9 @@ if [ "$GIT_REPO" != "" ]; then
     mv /opt/jboss/keycloak-?.?.?* /opt/jboss/keycloak
 
     # Remove temporary files
-    #rm -rf /opt/jboss/maven
+    rm -rf /opt/jboss/maven
     rm -rf /opt/jboss/keycloak-source
-    #rm -rf $HOME/.m2/repository
+    rm -rf $HOME/.m2/repository
 else
     echo "Keycloak from [download]: $KEYCLOAK_DIST"
 
