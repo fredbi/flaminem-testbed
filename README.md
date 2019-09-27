@@ -56,7 +56,7 @@ hack/build-all-images.sh
 ```bash
 docker images|grep keycloak
 ...
-keycloak-flaminem                                               latest                            7f355a10e8dd        6 hours ago         2.13GB
+keycloak-flaminem                                               latest                            5e35fd54be45        7 minutes ago       1.22GB
 keycloak-builder                                                latest                            91e39cf04dd9        28 hours ago        910MB
 jboss/keycloak                                                  6.0.1                             3a6718ca4ee0        5 months ago        1.2GB
 ```
